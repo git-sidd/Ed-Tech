@@ -1,0 +1,61 @@
+# Node.js dependencies
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.pid.lock
+
+# Directory for uploaded files (if using a local directory)
+uploads/
+temp/
+
+# Cloudinary temporary files
+tmp/
+*.tmp
+
+# Database files
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE/Editor-specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Coverage reports
+coverage/
+*.lcov
+nyc_output/
+
+# Testing
+.jest/
+.cypress/
+
+# Build files (if you're using a build process)
+dist/
+build/
