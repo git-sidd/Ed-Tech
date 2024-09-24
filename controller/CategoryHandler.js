@@ -1,4 +1,4 @@
-import {Tag} from "../model/Tag.js";
+import {Category} from "../model/Category.js";
 
 export const createTags=async(req,res)=>{
     try {
@@ -12,11 +12,11 @@ export const createTags=async(req,res)=>{
             })
         }
         //create entry in db
-        const tag=await Tag.create({
+        const category=await Category.create({
             tagName:tagName,
             description:description,
         })
-        console.log("Tag:",tag)
+        console.log("Category:",category)
         return  res.status(200).json({
             success:true,
             messsage:"Tags Created Successfully..!"
@@ -32,7 +32,7 @@ export const createTags=async(req,res)=>{
   
 export const showAllTags=async(req,res)=>{
     try {
-        const allTags=await Tag.find({},{
+        const allTags=await Category.find({},{
             tagName:true,
             description:true,
         })

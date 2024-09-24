@@ -1,5 +1,5 @@
 import {Course} from "../model/Course.js";
-import { Tag } from "../model/Tag.js";
+import { Category } from "../model/Category.js";
 import {User} from "../model/User.js"
 import  {uplaodImageToCloudinary} from "../utils/imageUploader.js"
 import dotenv from "dotenv";
@@ -11,11 +11,11 @@ dotenv.config({
 export const createCourse=async ()=>{
     try {
         //fetch Data..
-        const {courseName,courseDescription,whatWillYouLearn,price,tag}=req.body;
+        const {courseName,courseDescription,whatWillYouLearn,price,category}=req.body;
         //fetch Thumbnail..
         const thumbnail=req.files.thumbnailImage;
         //validation..
-        if(!courseName||!courseDescription||!whatWillYouLearn||!price||!tag||!thumbnail){
+        if(!courseName||!courseDescription||!whatWillYouLearn||!price||!category||!thumbnail){
             return res.status(400).json({
                 success:false,
                 message:"All Fields are required.."
@@ -31,12 +31,12 @@ export const createCourse=async ()=>{
                 message:"Instructor Details Not Found.."
             })
         }
-        //check given tag is valid
-        const tagDetails=await Tag.findById(tag)
+        //check given category is valid
+        const tagDetails=await Category.findById(category)
         if(!tagDetails){
             return res.status(400).json({
                 success:false,
-                message:"Tag Details Not Found.."
+                message:"Category Details Not Found.."
             })
         }
         //uplaod image to cloudinary
@@ -49,7 +49,7 @@ export const createCourse=async ()=>{
             instructor:instructorDetails._id,
             whatWillYouLearn,
             price,
-            tag:tagDetails._id,
+            category:tagDetails._id,
             thumbnail:thumbnailImage.secure_url
 
         })
@@ -63,8 +63,8 @@ export const createCourse=async ()=>{
             },
             {new:true}
         )
-        //update Tag Schema..
-        await Tag.findByIdAndUpdate(
+        //update Category Schema..
+        await Category.findByIdAndUpdate(
             {_id:tagDetails._id},
             {
                 $push:{
