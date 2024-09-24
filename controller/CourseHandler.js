@@ -11,11 +11,11 @@ dotenv.config({
 export const createCourse=async ()=>{
     try {
         //fetch Data..
-        const {courseName,courseDescription,whatWillYouLearn,price,category}=req.body;
+        const {courseName,courseDescription,whatWillYouLearn,price,category,tag}=req.body;
         //fetch Thumbnail..
         const thumbnail=req.files.thumbnailImage;
         //validation..
-        if(!courseName||!courseDescription||!whatWillYouLearn||!price||!category||!thumbnail){
+        if(!courseName||!courseDescription||!whatWillYouLearn||!price||!category||!thumbnail ||!tag){
             return res.status(400).json({
                 success:false,
                 message:"All Fields are required.."
@@ -32,8 +32,8 @@ export const createCourse=async ()=>{
             })
         }
         //check given category is valid
-        const tagDetails=await Category.findById(category)
-        if(!tagDetails){
+        const categoryDetails=await Category.findById(category)
+        if(!categoryDetails){
             return res.status(400).json({
                 success:false,
                 message:"Category Details Not Found.."
@@ -49,7 +49,8 @@ export const createCourse=async ()=>{
             instructor:instructorDetails._id,
             whatWillYouLearn,
             price,
-            category:tagDetails._id,
+            tag,
+            category:categoryDetails._id,
             thumbnail:thumbnailImage.secure_url
 
         })
@@ -65,7 +66,7 @@ export const createCourse=async ()=>{
         )
         //update Category Schema..
         await Category.findByIdAndUpdate(
-            {_id:tagDetails._id},
+            {_id:categoryDetails._id},
             {
                 $push:{
                     course:newCourse._id
