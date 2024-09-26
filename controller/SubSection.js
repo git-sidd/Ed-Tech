@@ -37,7 +37,9 @@ export const createSubSection = async (req, res) => {
             },
             { new: true }
             //log updated section here,after adding populate query..
-        )
+        ).populate({path:"subSection",
+            model:"SubSection"
+        })
         //return response
         return res.status(200).json({
             success: false,

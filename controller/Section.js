@@ -23,7 +23,12 @@ export const createSection = async (req, res) => {
                 },
             },
             { new: true }
-        );
+        ).populate({
+            path:"courseContent",
+            populate:{
+                path:"Section"
+            }
+        });
         return res.status(200).json({
             success: true,
             message: "Section Created Successfully..",

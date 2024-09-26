@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config({
     path:"./.env"
 })
-const mailSender=async(email,title,body)=>{
+export const mailSender=async(email,title,body)=>{
     try {
         let transporter=nodemailer.createTransport({
             host:process.env.MAIL_HOST,
@@ -23,4 +23,3 @@ const mailSender=async(email,title,body)=>{
         console.log("Error in mail sender:",error.message)
     }
 }
-export default mailSender;
